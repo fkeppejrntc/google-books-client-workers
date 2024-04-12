@@ -1,0 +1,67 @@
+{
+  "components": [
+    {
+      "label": "e-Book Title",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_03rn7hy",
+        "columns": null
+      },
+      "id": "Field_1yrlimh",
+      "key": "book.title",
+      "readonly": true
+    },
+    {
+      "label": "e-Book URL",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1pa6qly",
+        "columns": null
+      },
+      "id": "Field_12g4zh8",
+      "key": "book.link",
+      "readonly": true
+    },
+    {
+      "label": "Time of Loan",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0rrb9iz",
+        "columns": null
+      },
+      "id": "Field_0rfybkf",
+      "key": "timeOfLoan",
+      "readonly": true
+    },
+    {
+      "label": "Loan Cost",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1jam7s1",
+        "columns": null
+      },
+      "id": "Field_1xf0q27",
+      "key": "loanCost",
+      "readonly": true
+    },
+    {
+      "label": "e-Book ID",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0hjanhj",
+        "columns": null
+      },
+      "id": "Field_13ks3ee",
+      "key": "book.id"
+    }
+  ],
+  "type": "default",
+  "id": "GoogleBooksLibrary_FormGetLink",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "schemaVersion": 15
+}

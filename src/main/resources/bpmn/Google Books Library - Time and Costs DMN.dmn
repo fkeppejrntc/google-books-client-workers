@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="GoogleBooksLibrary_TimeAndCosts" name="Google Books Library - Time and Costs DMN" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.4.0" camunda:diagramRelationId="47927f9a-33b9-4d47-a634-b6f3e76e0a32">
+  <decision id="GoogleBooksLibrary_TimeAndCosts_TimeOfLoan" name="Time of Loan">
+    <informationRequirement id="InformationRequirement_0zgs8r9">
+      <requiredInput href="#InputData_04cwpoa" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_17foc5k">
+      <requiredInput href="#InputData_1vl4m3m" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1ej9bcm" hitPolicy="FIRST">
+      <input id="Input_1" label="Book Pages Count">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>book.pageCount</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1l2erui" label="Book Genre">
+        <inputExpression id="LiteralExpression_1o9t04j" typeRef="string">
+          <text>book.genre</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Time of Loan" name="timeOfLoan" typeRef="number" />
+      <rule id="DecisionRule_1agltj9">
+        <inputEntry id="UnaryTests_0sg6aaq">
+          <text>&lt;=100</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10n3sma">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1u7kpxr">
+          <text>14</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1l3xh54">
+        <inputEntry id="UnaryTests_1nbzlxf">
+          <text>[100..499]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0wj340c">
+          <text>"Fiction"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0mdgt75">
+          <text>14</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0bqfxzy">
+        <inputEntry id="UnaryTests_0tv5oev">
+          <text>[100..499]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0918dn1">
+          <text>"History"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_175issq">
+          <text>30</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05ren2s">
+        <inputEntry id="UnaryTests_0g6iu9e">
+          <text>[100..499]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nsiswv">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_16goidr">
+          <text>20</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1m4vpux">
+        <inputEntry id="UnaryTests_16y0x9z">
+          <text>&gt;=500</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dr1le2">
+          <text>"Fiction"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_14htyve">
+          <text>20</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_08da8nk">
+        <inputEntry id="UnaryTests_1pwihi4">
+          <text>&gt;=500</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0toeb7w">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13qdjqo">
+          <text>45</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_04cwpoa" name="Book Genre" />
+  <inputData id="InputData_1vl4m3m" name="Book Pages Count" />
+  <inputData id="InputData_0bkmim0" name="Is Best Seller?" />
+  <decision id="GoogleBooksLibrary_TimeAndCosts_CostOfLoan" name="Cost of Loan">
+    <informationRequirement id="InformationRequirement_17f2ux7">
+      <requiredDecision href="#GoogleBooksLibrary_TimeAndCosts_TimeOfLoan" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_07l3nw6">
+      <requiredInput href="#InputData_0bkmim0" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_06x3w66">
+      <requiredInput href="#InputData_04cwpoa" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_14rdq63">
+      <input id="InputClause_1kyi5se" label="Time of Loan">
+        <inputExpression id="LiteralExpression_0fsa0pa" typeRef="number">
+          <text>timeOfLoan</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0qtb480" label="Book Genre">
+        <inputExpression id="LiteralExpression_0zwfjp3" typeRef="string">
+          <text>book.genre</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1y2wkhu" label="Is Best Seller?">
+        <inputExpression id="LiteralExpression_02wqwk9" typeRef="boolean">
+          <text>book.isBestSeller</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0ofvj8s" label="Loan Cost" name="loanCost" typeRef="number" />
+      <rule id="DecisionRule_0b7lc59">
+        <inputEntry id="UnaryTests_0v7bry9">
+          <text>&lt;=15</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1hggeee">
+          <text>"Fiction"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bbeg18">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mmdbcu">
+          <text>9.99</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18nkewg">
+        <inputEntry id="UnaryTests_0p2pz9r">
+          <text>&gt;15</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ypno69">
+          <text>"Fiction"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0582qhe">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_09xmtqv">
+          <text>14.99</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="GoogleBooksLibrary_TimeAndCosts_TimeOfLoan">
+        <dc:Bounds height="80" width="180" x="230" y="270" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_173ilf6" dmnElementRef="InputData_04cwpoa">
+        <dc:Bounds height="45" width="125" x="397" y="437" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_10mkbh4" dmnElementRef="InputData_1vl4m3m">
+        <dc:Bounds height="45" width="125" x="157" y="437" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1aoorup" dmnElementRef="InputData_0bkmim0">
+        <dc:Bounds height="45" width="125" x="628" y="288" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1o2ujds" dmnElementRef="GoogleBooksLibrary_TimeAndCosts_CostOfLoan">
+        <dc:Bounds height="80" width="180" x="440" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0e68nyu" dmnElementRef="InformationRequirement_0zgs8r9">
+        <di:waypoint x="460" y="437" />
+        <di:waypoint x="350" y="370" />
+        <di:waypoint x="350" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1mh9wih" dmnElementRef="InformationRequirement_17foc5k">
+        <di:waypoint x="220" y="437" />
+        <di:waypoint x="290" y="370" />
+        <di:waypoint x="290" y="350" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1rtpy3v" dmnElementRef="InformationRequirement_17f2ux7">
+        <di:waypoint x="320" y="270" />
+        <di:waypoint x="485" y="180" />
+        <di:waypoint x="485" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1jw3viw" dmnElementRef="InformationRequirement_07l3nw6">
+        <di:waypoint x="691" y="288" />
+        <di:waypoint x="575" y="180" />
+        <di:waypoint x="575" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1nw6cia" dmnElementRef="InformationRequirement_06x3w66">
+        <di:waypoint x="460" y="437" />
+        <di:waypoint x="530" y="180" />
+        <di:waypoint x="530" y="160" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

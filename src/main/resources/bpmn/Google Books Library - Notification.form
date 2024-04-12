@@ -1,0 +1,23 @@
+{
+  "components": [
+    {
+      "label": "Notification message",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_14c7mr5",
+        "columns": null
+      },
+      "id": "Field_06jmc8m",
+      "key": "notification"
+    }
+  ],
+  "type": "default",
+  "id": "GoogleBooksLibrary_FormNotification",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "schemaVersion": 15
+}

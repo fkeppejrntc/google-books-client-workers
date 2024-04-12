@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.4.0" camunda:diagramRelationId="31307828-50b7-431c-8782-37e6209d38bc">
+  <bpmn:collaboration id="Collaboration_1abp1pd">
+    <bpmn:participant id="Participant_1svapms" name="Borrow e-Book" processRef="Borrow_Book" />
+    <bpmn:textAnnotation id="TextAnnotation_1e0gb1b">
+      <bpmn:text>Falta uma propriedade no componente da camunda que permita adicionar URL.
+- Documentação: https://developers.facebook.com/docs/whatsapp/api/messages/text/
+- Parâmetro: "preview_url": true</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_150mwce" associationDirection="None" sourceRef="sendEBookLink" targetRef="TextAnnotation_1e0gb1b" />
+  </bpmn:collaboration>
+  <bpmn:process id="Borrow_Book" name="Google Books Library" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:userTaskForm id="UserTaskForm_3bpvs87">{
+  "components": [
+    {
+      "text": "##### Book List",
+      "type": "text",
+      "id": "Subheading_0",
+      "layout": {
+        "row": "Row_0qs44cf"
+      }
+    },
+    {
+      "label": "Add your Phone #",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0wc1m30",
+        "columns": null
+      },
+      "id": "Field_1qbybqx",
+      "key": "phoneNumber",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "components": [
+        {
+          "label": "",
+          "type": "checkbox",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": 2
+          },
+          "id": "Field_008es33",
+          "key": "selected",
+          "disabled": false
+        },
+        {
+          "label": "Book Title",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0oq23jl",
+          "key": "title",
+          "disabled": false,
+          "readonly": true
+        },
+        {
+          "label": "Authors",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0gf94xj",
+          "key": "authors",
+          "readonly": true,
+          "disabled": false
+        },
+        {
+          "label": "Genre",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0rwlp2n",
+          "key": "genre",
+          "disabled": false,
+          "readonly": true
+        },
+        {
+          "label": "Page Count",
+          "type": "number",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0ch1tb9",
+          "key": "pageCount",
+          "readonly": true,
+          "disabled": false
+        },
+        {
+          "label": "Id",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_17pz1sf",
+          "key": "id",
+          "readonly": true
+        },
+        {
+          "label": "Link",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_15dkcae",
+          "key": "link",
+          "readonly": true
+        },
+        {
+          "label": "Best Seller",
+          "type": "checkbox",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0aliyp8",
+          "key": "isBestSeller",
+          "readonly": true
+        }
+      ],
+      "showOutline": true,
+      "isRepeating": true,
+      "allowAddRemove": false,
+      "defaultRepetitions": 1,
+      "label": "Chose one ore more books to read",
+      "type": "dynamiclist",
+      "layout": {
+        "row": "Row_0gug6o9",
+        "columns": null
+      },
+      "id": "Field_0l4oyj1",
+      "path": "booklist.volumeList",
+      "verticalAlignment": "center"
+    }
+  ],
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "schemaVersion": 15,
+  "id": "GoogleBooksLibrary_FormChoseAnEBook",
+  "generated": true,
+  "type": "default"
+}</zeebe:userTaskForm>
+      <zeebe:userTaskForm id="UserTaskForm_2v7alvn">{
+  "components": [
+    {
+      "values": [
+        {
+          "label": "Yes, take me back to the booklist.",
+          "value": "true"
+        },
+        {
+          "label": "No, I'm done for now.",
+          "value": "false"
+        }
+      ],
+      "label": "There was an error on your book loan. Do you want to try again or chose other?",
+      "type": "radio",
+      "layout": {
+        "row": "Row_0bi25pp",
+        "columns": null
+      },
+      "id": "Field_1s9umfz",
+      "key": "tryBookSelectionAgain",
+      "defaultValue": "true"
+    }
+  ],
+  "type": "default",
+  "id": "GoogleBooksLibrary_FormChoseOther",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "schemaVersion": 15
+}</zeebe:userTaskForm>
+      <zeebe:userTaskForm id="UserTaskForm_1lo0l7p">{
+  "components": [
+    {
+      "label": "e-Book Title",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_03rn7hy",
+        "columns": null
+      },
+      "id": "Field_1yrlimh",
+      "key": "book.title",
+      "readonly": true
+    },
+    {
+      "label": "e-Book URL",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1pa6qly",
+        "columns": null
+      },
+      "id": "Field_12g4zh8",
+      "key": "book.link",
+      "readonly": true
+    },
+    {
+      "label": "Time of Loan",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0rrb9iz",
+        "columns": null
+      },
+      "id": "Field_0rfybkf",
+      "key": "timeOfLoan",
+      "readonly": true
+    },
+    {
+      "label": "Loan Cost",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1jam7s1",
+        "columns": null
+      },
+      "id": "Field_1xf0q27",
+      "key": "loanCost",
+      "readonly": true
+    },
+    {
+      "label": "e-Book ID",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0hjanhj",
+        "columns": null
+      },
+      "id": "Field_13ks3ee",
+      "key": "book.id"
+    }
+  ],
+  "type": "default",
+  "id": "GoogleBooksLibrary_FormGetLink",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "schemaVersion": 15
+}</zeebe:userTaskForm>
+      <zeebe:userTaskForm id="UserTaskForm_1l2kbl2">{
+  "components": [
+    {
+      "label": "Notification message",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_14c7mr5",
+        "columns": null
+      },
+      "id": "Field_06jmc8m",
+      "key": "notification"
+    }
+  ],
+  "type": "default",
+  "id": "GoogleBooksLibrary_FormNotification",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "schemaVersion": 15
+}</zeebe:userTaskForm>
+      <zeebe:userTaskForm id="UserTaskForm_072g06a">{
+  "components": [
+    {
+      "label": "Notification message",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_14c7mr5",
+        "columns": null
+      },
+      "id": "Field_06jmc8m",
+      "key": "notification"
+    }
+  ],
+  "type": "default",
+  "id": "GoogleBooksLibrary_FormNotification",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "schemaVersion": 15
+}</zeebe:userTaskForm>
+    </bpmn:extensionElements>
+    <bpmn:startEvent id="startLoan" name="Start Loan">
+      <bpmn:extensionElements />
+      <bpmn:outgoing>Flow_12a7hjb</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="ChoseAnEBook" name="Chose an e-Book">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_3bpvs87" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_01ceugk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1tgugqx</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="gateway_Join01" name="Join">
+      <bpmn:incoming>Flow_0d8twmh</bpmn:incoming>
+      <bpmn:incoming>Flow_14na083</bpmn:incoming>
+      <bpmn:outgoing>Flow_01ceugk</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:businessRuleTask id="defineLoanTimeAndCost" name="Define Loan Time">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="GoogleBooksLibrary_TimeAndCosts_TimeOfLoan" resultVariable="timeOfLoan" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=book.pageCount" target="pageCount" />
+          <zeebe:input source="=book.genre" target="genre" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_01zf7ct</bpmn:incoming>
+      <bpmn:outgoing>Flow_1oczx1g</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:scriptTask id="Activity_1sxvxsd" name="Get Selected Book">
+      <bpmn:extensionElements>
+        <zeebe:script expression="=booklist.volumeList[selected=true][1]" resultVariable="book" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1tgugqx</bpmn:incoming>
+      <bpmn:outgoing>Flow_01zf7ct</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:businessRuleTask id="Activity_0ic91g3" name="Define Loan Cost">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="GoogleBooksLibrary_TimeAndCosts_CostOfLoan" resultVariable="loanCost" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=book.pageCount" target="pageCount" />
+          <zeebe:input source="=book.genre" target="genre" />
+          <zeebe:input source="=book.isBestSeller" target="isBestSeller" />
+          <zeebe:input source="=timeOfLoan" target="timeOfLoan" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1oczx1g</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pnbhzo</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="Flow_12a7hjb" sourceRef="startLoan" targetRef="searchAvailableEBooks" />
+    <bpmn:sequenceFlow id="Flow_0d8twmh" sourceRef="searchAvailableEBooks" targetRef="gateway_Join01" />
+    <bpmn:sequenceFlow id="Flow_1tgugqx" sourceRef="ChoseAnEBook" targetRef="Activity_1sxvxsd" />
+    <bpmn:sequenceFlow id="Flow_14na083" name="Yes" sourceRef="gateway_ChoseOther" targetRef="gateway_Join01">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=tryBookSelectionAgain</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_01ceugk" sourceRef="gateway_Join01" targetRef="ChoseAnEBook" />
+    <bpmn:sequenceFlow id="Flow_1oczx1g" sourceRef="defineLoanTimeAndCost" targetRef="Activity_0ic91g3" />
+    <bpmn:sequenceFlow id="Flow_0pnbhzo" sourceRef="Activity_0ic91g3" targetRef="loanBook" />
+    <bpmn:sequenceFlow id="Flow_0quqhk1" sourceRef="Gateway_07afq49" targetRef="gateway_LoanReturn" />
+    <bpmn:sequenceFlow id="Flow_02da48n" sourceRef="timer_TwoDaysBeforeReturn" targetRef="notifyTwoDaysForEndOfLoanTime" />
+    <bpmn:sequenceFlow id="Flow_0z2grnv" sourceRef="notifyTwoDaysForEndOfLoanTime" targetRef="endOfNotification" />
+    <bpmn:sequenceFlow id="Flow_0x7uhj1" sourceRef="gateway_LoanReturn" targetRef="message_LoanReturnManually" />
+    <bpmn:sequenceFlow id="Flow_0z3cogf" sourceRef="gateway_LoanReturn" targetRef="timer_LoanTimeExpired" />
+    <bpmn:sequenceFlow id="Flow_0q6ay9x" sourceRef="timer_LoanTimeExpired" targetRef="notifyEndOfLoanTime" />
+    <bpmn:sequenceFlow id="Flow_1xk7dvc" sourceRef="message_LoanReturnManually" targetRef="returnBook" />
+    <bpmn:sequenceFlow id="Flow_1g7z0bk" sourceRef="notifyEndOfLoanTime" targetRef="Activity_1mj6g9m" />
+    <bpmn:sequenceFlow id="Flow_01zf7ct" sourceRef="Activity_1sxvxsd" targetRef="defineLoanTimeAndCost" />
+    <bpmn:serviceTask id="searchAvailableEBooks" name="Search Available e-Books" zeebe:modelerTemplate="ae39c5a6-ed65-4c99-9622-5f2e660970f0" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/png;base64,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">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:google-books:1" />
+        <zeebe:ioMapping>
+          <zeebe:input source="bearer" target="authentication.authType" />
+          <zeebe:input source="=bearerToken" target="authentication.bearerToken" />
+          <zeebe:input source="getVolumesListFromMyBookshelf" target="operation.type" />
+          <zeebe:input source="=1001" target="operation.bookshelfId" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="booklist" />
+          <zeebe:header key="errorExpression" value="=if error.code = &#34;404&#34; then&#10;  bpmnError(&#34;404&#34;, &#34;Got a 404&#34;)&#10;else if error.code = &#34;500&#34; then&#10;  bpmnError(&#34;500&#34;, &#34;Got a 500&#34;)&#10;else&#10;  null" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_12a7hjb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0d8twmh</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:intermediateCatchEvent id="timer_TwoDaysBeforeReturn" name="2 Days Before Return">
+      <bpmn:incoming>Flow_0xsi48a</bpmn:incoming>
+      <bpmn:outgoing>Flow_02da48n</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_19u3qis">
+        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">=notificationDate</bpmn:timeDate>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="endOfNotification" name="End of Notification">
+      <bpmn:incoming>Flow_0z2grnv</bpmn:incoming>
+      <bpmn:incoming>Flow_0ounus7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:eventBasedGateway id="gateway_LoanReturn" name="Loan Return">
+      <bpmn:incoming>Flow_0quqhk1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0x7uhj1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0z3cogf</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="timer_LoanTimeExpired" name="Loan Time Expired">
+      <bpmn:incoming>Flow_0z3cogf</bpmn:incoming>
+      <bpmn:outgoing>Flow_0q6ay9x</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1ftsyza">
+        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">=expirationDate</bpmn:timeDate>
+      </bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="message_LoanReturnManually" name="Loan Return Manually">
+      <bpmn:incoming>Flow_0x7uhj1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1xk7dvc</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0twd1qx" messageRef="Message_2grlus7" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:parallelGateway id="Gateway_07afq49">
+      <bpmn:incoming>Flow_1tg389h</bpmn:incoming>
+      <bpmn:outgoing>Flow_0quqhk1</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0xsi48a</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:sequenceFlow id="Flow_0xsi48a" sourceRef="Gateway_07afq49" targetRef="timer_TwoDaysBeforeReturn" />
+    <bpmn:sequenceFlow id="Flow_1b25i46" sourceRef="loanBook" targetRef="createWppMessages" />
+    <bpmn:subProcess id="returnBook" name="Return Book">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:input source="=bearerToken" target="bearerToken" />
+          <zeebe:input source="=1001" target="bookshelfToAdd" />
+          <zeebe:input source="=1003" target="bookshelfToRemove" />
+          <zeebe:input source="=book.id" target="bookId" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1xk7dvc</bpmn:incoming>
+      <bpmn:outgoing>Flow_0j90gpr</bpmn:outgoing>
+      <bpmn:startEvent id="Event_1i9vrj0">
+        <bpmn:outgoing>Flow_0mhkl7m</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:endEvent id="Event_15ylfvh">
+        <bpmn:incoming>Flow_0hwcy76</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:serviceTask id="Activity_13r59i9" name="Add Book to Bookshelf" zeebe:modelerTemplate="ae39c5a6-ed65-4c99-9622-5f2e660970f0" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/png;base64,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">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="io.camunda:google-books:1" />
+          <zeebe:ioMapping>
+            <zeebe:input source="bearer" target="authentication.authType" />
+            <zeebe:input source="=bearerToken" target="authentication.bearerToken" />
+            <zeebe:input source="addVolumeToMyBookshelf" target="operation.type" />
+            <zeebe:input source="=bookshelfToAdd" target="operation.bookshelfId" />
+            <zeebe:input source="=bookId" target="operation.volumeId" />
+          </zeebe:ioMapping>
+          <zeebe:taskHeaders />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0mhkl7m</bpmn:incoming>
+        <bpmn:outgoing>Flow_0nf17h4</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:serviceTask id="Activity_1m2idd1" name="Remove Book from Booksheld" zeebe:modelerTemplate="ae39c5a6-ed65-4c99-9622-5f2e660970f0" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/png;base64,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">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="io.camunda:google-books:1" />
+          <zeebe:ioMapping>
+            <zeebe:input source="bearer" target="authentication.authType" />
+            <zeebe:input source="=bearerToken" target="authentication.bearerToken" />
+            <zeebe:input source="removeVolumeFromMyBookshelf" target="operation.type" />
+            <zeebe:input source="=bookshelfToRemove" target="operation.bookshelfId" />
+            <zeebe:input source="=bookId" target="operation.volumeId" />
+          </zeebe:ioMapping>
+          <zeebe:taskHeaders />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0nf17h4</bpmn:incoming>
+        <bpmn:outgoing>Flow_0hwcy76</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:sequenceFlow id="Flow_0mhkl7m" sourceRef="Event_1i9vrj0" targetRef="Activity_13r59i9" />
+      <bpmn:sequenceFlow id="Flow_0hwcy76" sourceRef="Activity_1m2idd1" targetRef="Event_15ylfvh" />
+      <bpmn:sequenceFlow id="Flow_0nf17h4" sourceRef="Activity_13r59i9" targetRef="Activity_1m2idd1" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_0j90gpr" sourceRef="returnBook" targetRef="endOfLoan" />
+    <bpmn:subProcess id="loanBook" name="Loan Book">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:input source="=bearerToken" target="bearerToken" />
+          <zeebe:input source="=1003" target="bookshelfToAdd" />
+          <zeebe:input source="=1001" target="bookshelfToRemove" />
+          <zeebe:input source="=book.id" target="bookId" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0pnbhzo</bpmn:incoming>
+      <bpmn:outgoing>Flow_1b25i46</bpmn:outgoing>
+      <bpmn:startEvent id="Event_09iiojx">
+        <bpmn:outgoing>Flow_0uxq2vm</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_0uxq2vm" sourceRef="Event_09iiojx" targetRef="Activity_0vx47k4" />
+      <bpmn:sequenceFlow id="Flow_02p89h8" sourceRef="Activity_0vx47k4" targetRef="Activity_0x8ghd4" />
+      <bpmn:endEvent id="Event_0la9a8f">
+        <bpmn:incoming>Flow_0hibhsa</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0hibhsa" sourceRef="Activity_0x8ghd4" targetRef="Event_0la9a8f" />
+      <bpmn:serviceTask id="Activity_0vx47k4" name="Add Book to Bookshelf" zeebe:modelerTemplate="ae39c5a6-ed65-4c99-9622-5f2e660970f0" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/png;base64,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">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="io.camunda:google-books:1" />
+          <zeebe:ioMapping>
+            <zeebe:input source="bearer" target="authentication.authType" />
+            <zeebe:input source="=bearerToken" target="authentication.bearerToken" />
+            <zeebe:input source="addVolumeToMyBookshelf" target="operation.type" />
+            <zeebe:input source="=bookshelfToAdd" target="operation.bookshelfId" />
+            <zeebe:input source="=bookId" target="operation.volumeId" />
+          </zeebe:ioMapping>
+          <zeebe:taskHeaders />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_0uxq2vm</bpmn:incoming>
+        <bpmn:outgoing>Flow_02p89h8</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:serviceTask id="Activity_0x8ghd4" name="Remove Book from Booksheld" zeebe:modelerTemplate="ae39c5a6-ed65-4c99-9622-5f2e660970f0" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/png;base64,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">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="io.camunda:google-books:1" />
+          <zeebe:ioMapping>
+            <zeebe:input source="bearer" target="authentication.authType" />
+            <zeebe:input source="=bearerToken" target="authentication.bearerToken" />
+            <zeebe:input source="removeVolumeFromMyBookshelf" target="operation.type" />
+            <zeebe:input source="=bookshelfToRemove" target="operation.bookshelfId" />
+            <zeebe:input source="=bookId" target="operation.volumeId" />
+          </zeebe:ioMapping>
+          <zeebe:taskHeaders />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_02p89h8</bpmn:incoming>
+        <bpmn:outgoing>Flow_0hibhsa</bpmn:outgoing>
+      </bpmn:serviceTask>
+    </bpmn:subProcess>
+    <bpmn:exclusiveGateway id="gateway_ChoseOther" name="Chose for other e-Book?" default="Flow_16f6vqi">
+      <bpmn:incoming>Flow_1qgyg3d</bpmn:incoming>
+      <bpmn:outgoing>Flow_16f6vqi</bpmn:outgoing>
+      <bpmn:outgoing>Flow_14na083</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="cancelLoan" name="Cancel Loan">
+      <bpmn:incoming>Flow_16f6vqi</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="exception_LoanError" attachedToRef="loanBook">
+      <bpmn:outgoing>Flow_0v9d3w5</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_15uy8sd" errorRef="Error_069yslm" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_0v9d3w5" sourceRef="exception_LoanError" targetRef="choseOtherEBook" />
+    <bpmn:sequenceFlow id="Flow_1qgyg3d" sourceRef="choseOtherEBook" targetRef="gateway_ChoseOther" />
+    <bpmn:sequenceFlow id="Flow_16f6vqi" name="No" sourceRef="gateway_ChoseOther" targetRef="cancelLoan" />
+    <bpmn:serviceTask id="createWppMessages" name="Create Wpp Messages">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="create-whatsapp-messages" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=timeOfLoan" target="timeOfLoan" />
+          <zeebe:input source="=loanCost" target="loanCost" />
+          <zeebe:input source="=book.title" target="bookTitle" />
+          <zeebe:input source="=book.link" target="bookLink" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1b25i46</bpmn:incoming>
+      <bpmn:outgoing>Flow_1bkca4i</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="notifyTwoDaysForEndOfLoanTime" name="Notify 2 Days for End of Loan Time" zeebe:modelerTemplate="io.camunda.connectors.WhatsApp.v1" zeebe:modelerTemplateVersion="2" zeebe:modelerTemplateIcon="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; width=&#39;18&#39; height=&#39;18&#39; viewBox=&#39;0 0 175.216 175.552&#39;%3E%3Cdefs%3E%3ClinearGradient id=&#39;b&#39; x1=&#39;85.915&#39; x2=&#39;86.535&#39; y1=&#39;32.567&#39; y2=&#39;137.092&#39; gradientUnits=&#39;userSpaceOnUse&#39;%3E%3Cstop offset=&#39;0&#39; stop-color=&#39;%2357d163&#39;/%3E%3Cstop offset=&#39;1&#39; stop-color=&#39;%2323b33a&#39;/%3E%3C/linearGradient%3E%3Cfilter id=&#39;a&#39; width=&#39;1.115&#39; height=&#39;1.114&#39; x=&#39;-.057&#39; y=&#39;-.057&#39; color-interpolation-filters=&#39;sRGB&#39;%3E%3CfeGaussianBlur stdDeviation=&#39;3.531&#39;/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill=&#39;%23b3b3b3&#39; d=&#39;m54.532 138.45 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.523h.023c33.707 0 61.139-27.426 61.153-61.135.006-16.335-6.349-31.696-17.895-43.251A60.75 60.75 0 0 0 87.94 25.983c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.558zm-40.811 23.544L24.16 123.88c-6.438-11.154-9.825-23.808-9.821-36.772.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954zm0 0&#39; filter=&#39;url(%23a)&#39;/%3E%3Cpath fill=&#39;%23fff&#39; d=&#39;m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z&#39;/%3E%3Cpath fill=&#39;url(%23linearGradient1780)&#39; d=&#39;M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z&#39;/%3E%3Cpath fill=&#39;url(%23b)&#39; d=&#39;M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z&#39;/%3E%3Cpath fill=&#39;%23fff&#39; fill-rule=&#39;evenodd&#39; d=&#39;M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647&#39;/%3E%3C/svg%3E">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=wppToken" target="authentication.token" />
+          <zeebe:input source="191984980667422" target="senderPhoneId" />
+          <zeebe:input source="=phoneNumber" target="recipientPhoneNumber" />
+          <zeebe:input source="messageTemplate" target="messageType" />
+          <zeebe:input source="notification_message" target="templateName" />
+          <zeebe:input source="en_US" target="templateLanguageCode" />
+          <zeebe:input source="=[]" target="headerParameters" />
+          <zeebe:input source="=notificationMessageBody" target="bodyParameters" />
+          <zeebe:input source="bearer" target="authentication.type" />
+          <zeebe:input source="post" target="method" />
+          <zeebe:input source="=&#34;https://graph.facebook.com/v17.0/&#34;+senderPhoneId+&#34;/messages&#34;" target="url" />
+          <zeebe:input source="={&#34;messaging_product&#34;:&#34;whatsapp&#34;,&#34;recipient_type&#34;:&#34;individual&#34;,&#34;to&#34;:recipientPhoneNumber,&#34;type&#34;:&#34;template&#34;, &#34;template&#34;: {&#34;name&#34;:templateName, &#34;language&#34;: { &#34;code&#34;: templateLanguageCode}, &#34;components&#34;:[{&#34;type&#34;:&#34;header&#34;, &#34;parameters&#34;:headerParameters}, {&#34;type&#34;:&#34;body&#34;, &#34;parameters&#34;:bodyParameters}]}}" target="body" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="notifyTwoDaysForEndOfLoanTimeResult" />
+          <zeebe:header key="errorExpression" value="=if error.code = &#34;404&#34; then&#10;  bpmnError(&#34;404&#34;, &#34;Got a 404&#34;)&#10;else if error.code = &#34;500&#34; then&#10;  bpmnError(&#34;500&#34;, &#34;Got a 500&#34;)&#10;else&#10;  null" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_02da48n</bpmn:incoming>
+      <bpmn:outgoing>Flow_0z2grnv</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="notifyEndOfLoanTime" name="Notify End of Loan Time" zeebe:modelerTemplate="io.camunda.connectors.WhatsApp.v1" zeebe:modelerTemplateVersion="2" zeebe:modelerTemplateIcon="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; width=&#39;18&#39; height=&#39;18&#39; viewBox=&#39;0 0 175.216 175.552&#39;%3E%3Cdefs%3E%3ClinearGradient id=&#39;b&#39; x1=&#39;85.915&#39; x2=&#39;86.535&#39; y1=&#39;32.567&#39; y2=&#39;137.092&#39; gradientUnits=&#39;userSpaceOnUse&#39;%3E%3Cstop offset=&#39;0&#39; stop-color=&#39;%2357d163&#39;/%3E%3Cstop offset=&#39;1&#39; stop-color=&#39;%2323b33a&#39;/%3E%3C/linearGradient%3E%3Cfilter id=&#39;a&#39; width=&#39;1.115&#39; height=&#39;1.114&#39; x=&#39;-.057&#39; y=&#39;-.057&#39; color-interpolation-filters=&#39;sRGB&#39;%3E%3CfeGaussianBlur stdDeviation=&#39;3.531&#39;/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill=&#39;%23b3b3b3&#39; d=&#39;m54.532 138.45 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.523h.023c33.707 0 61.139-27.426 61.153-61.135.006-16.335-6.349-31.696-17.895-43.251A60.75 60.75 0 0 0 87.94 25.983c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.558zm-40.811 23.544L24.16 123.88c-6.438-11.154-9.825-23.808-9.821-36.772.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954zm0 0&#39; filter=&#39;url(%23a)&#39;/%3E%3Cpath fill=&#39;%23fff&#39; d=&#39;m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z&#39;/%3E%3Cpath fill=&#39;url(%23linearGradient1780)&#39; d=&#39;M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z&#39;/%3E%3Cpath fill=&#39;url(%23b)&#39; d=&#39;M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z&#39;/%3E%3Cpath fill=&#39;%23fff&#39; fill-rule=&#39;evenodd&#39; d=&#39;M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647&#39;/%3E%3C/svg%3E">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=wppToken" target="authentication.token" />
+          <zeebe:input source="191984980667422" target="senderPhoneId" />
+          <zeebe:input source="=phoneNumber" target="recipientPhoneNumber" />
+          <zeebe:input source="messageTemplate" target="messageType" />
+          <zeebe:input source="return_message" target="templateName" />
+          <zeebe:input source="en_US" target="templateLanguageCode" />
+          <zeebe:input source="=[]" target="headerParameters" />
+          <zeebe:input source="=returnMessageBody" target="bodyParameters" />
+          <zeebe:input source="bearer" target="authentication.type" />
+          <zeebe:input source="post" target="method" />
+          <zeebe:input source="=&#34;https://graph.facebook.com/v17.0/&#34;+senderPhoneId+&#34;/messages&#34;" target="url" />
+          <zeebe:input source="={&#34;messaging_product&#34;:&#34;whatsapp&#34;,&#34;recipient_type&#34;:&#34;individual&#34;,&#34;to&#34;:recipientPhoneNumber,&#34;type&#34;:&#34;template&#34;, &#34;template&#34;: {&#34;name&#34;:templateName, &#34;language&#34;: { &#34;code&#34;: templateLanguageCode}, &#34;components&#34;:[{&#34;type&#34;:&#34;header&#34;, &#34;parameters&#34;:headerParameters}, {&#34;type&#34;:&#34;body&#34;, &#34;parameters&#34;:bodyParameters}]}}" target="body" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="notifyEndOfLoanTimeResult" />
+          <zeebe:header key="errorExpression" value="=&#10;if error.code = &#34;404&#34; then&#10;  bpmnError(&#34;404&#34;, &#34;Got a 404&#34;)&#10;else if error.code = &#34;500&#34; then&#10;  bpmnError(&#34;500&#34;, &#34;Got a 500&#34;)&#10;else&#10;  null" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0q6ay9x</bpmn:incoming>
+      <bpmn:outgoing>Flow_1g7z0bk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="choseOtherEBook" name="Chose Other e-Book">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_2v7alvn" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0v9d3w5</bpmn:incoming>
+      <bpmn:outgoing>Flow_1qgyg3d</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1btg08d" sourceRef="Activity_1i8cwdq" targetRef="Activity_0b5tu1z" />
+    <bpmn:boundaryEvent id="Event_0u33jmd" attachedToRef="notifyTwoDaysForEndOfLoanTime">
+      <bpmn:outgoing>Flow_1ey3fmq</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0jw44ys" errorRef="Error_1p2lpgl" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1ey3fmq" sourceRef="Event_0u33jmd" targetRef="Activity_1pndvre" />
+    <bpmn:boundaryEvent id="Event_06m9cxe" attachedToRef="notifyEndOfLoanTime">
+      <bpmn:outgoing>Flow_1bfx88f</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0zdyayt" errorRef="Error_1p2lpgl" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1bfx88f" sourceRef="Event_06m9cxe" targetRef="Activity_1wjkq9n" />
+    <bpmn:sequenceFlow id="Flow_0ounus7" sourceRef="Activity_1pndvre" targetRef="endOfNotification" />
+    <bpmn:userTask id="Activity_1pndvre" name="Show Notification">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1l2kbl2" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=notificationMessage" target="notification" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1ey3fmq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ounus7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_05a0aac" sourceRef="Activity_1wjkq9n" targetRef="Activity_1mj6g9m" />
+    <bpmn:userTask id="Activity_1wjkq9n" name="Show Notification">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_072g06a" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=returnMessage" target="notification" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1bfx88f</bpmn:incoming>
+      <bpmn:outgoing>Flow_05a0aac</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1bkca4i" sourceRef="createWppMessages" targetRef="sendEBookLink" />
+    <bpmn:serviceTask id="sendEBookLink" name="Send e-Book Link" zeebe:modelerTemplate="io.camunda.connectors.WhatsApp.v1" zeebe:modelerTemplateVersion="2" zeebe:modelerTemplateIcon="data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; width=&#39;18&#39; height=&#39;18&#39; viewBox=&#39;0 0 175.216 175.552&#39;%3E%3Cdefs%3E%3ClinearGradient id=&#39;b&#39; x1=&#39;85.915&#39; x2=&#39;86.535&#39; y1=&#39;32.567&#39; y2=&#39;137.092&#39; gradientUnits=&#39;userSpaceOnUse&#39;%3E%3Cstop offset=&#39;0&#39; stop-color=&#39;%2357d163&#39;/%3E%3Cstop offset=&#39;1&#39; stop-color=&#39;%2323b33a&#39;/%3E%3C/linearGradient%3E%3Cfilter id=&#39;a&#39; width=&#39;1.115&#39; height=&#39;1.114&#39; x=&#39;-.057&#39; y=&#39;-.057&#39; color-interpolation-filters=&#39;sRGB&#39;%3E%3CfeGaussianBlur stdDeviation=&#39;3.531&#39;/%3E%3C/filter%3E%3C/defs%3E%3Cpath fill=&#39;%23b3b3b3&#39; d=&#39;m54.532 138.45 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.523h.023c33.707 0 61.139-27.426 61.153-61.135.006-16.335-6.349-31.696-17.895-43.251A60.75 60.75 0 0 0 87.94 25.983c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.558zm-40.811 23.544L24.16 123.88c-6.438-11.154-9.825-23.808-9.821-36.772.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954zm0 0&#39; filter=&#39;url(%23a)&#39;/%3E%3Cpath fill=&#39;%23fff&#39; d=&#39;m12.966 161.238 10.439-38.114a73.42 73.42 0 0 1-9.821-36.772c.017-40.556 33.021-73.55 73.578-73.55 19.681.01 38.154 7.669 52.047 21.572s21.537 32.383 21.53 52.037c-.018 40.553-33.027 73.553-73.578 73.553h-.032c-12.313-.005-24.412-3.094-35.159-8.954z&#39;/%3E%3Cpath fill=&#39;url(%23linearGradient1780)&#39; d=&#39;M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.312-6.179 22.559 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.518 31.126 8.524h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.929z&#39;/%3E%3Cpath fill=&#39;url(%23b)&#39; d=&#39;M87.184 25.227c-33.733 0-61.166 27.423-61.178 61.13a60.98 60.98 0 0 0 9.349 32.535l1.455 2.313-6.179 22.558 23.146-6.069 2.235 1.324c9.387 5.571 20.15 8.517 31.126 8.523h.023c33.707 0 61.14-27.426 61.153-61.135a60.75 60.75 0 0 0-17.895-43.251 60.75 60.75 0 0 0-43.235-17.928z&#39;/%3E%3Cpath fill=&#39;%23fff&#39; fill-rule=&#39;evenodd&#39; d=&#39;M68.772 55.603c-1.378-3.061-2.828-3.123-4.137-3.176l-3.524-.043c-1.226 0-3.218.46-4.902 2.3s-6.435 6.287-6.435 15.332 6.588 17.785 7.506 19.013 12.718 20.381 31.405 27.75c15.529 6.124 18.689 4.906 22.061 4.6s10.877-4.447 12.408-8.74 1.532-7.971 1.073-8.74-1.685-1.226-3.525-2.146-10.877-5.367-12.562-5.981-2.91-.919-4.137.921-4.746 5.979-5.819 7.206-2.144 1.381-3.984.462-7.76-2.861-14.784-9.124c-5.465-4.873-9.154-10.891-10.228-12.73s-.114-2.835.808-3.751c.825-.824 1.838-2.147 2.759-3.22s1.224-1.84 1.836-3.065.307-2.301-.153-3.22-4.032-10.011-5.666-13.647&#39;/%3E%3C/svg%3E">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=wppToken" target="authentication.token" />
+          <zeebe:input source="191984980667422" target="senderPhoneId" />
+          <zeebe:input source="=phoneNumber" target="recipientPhoneNumber" />
+          <zeebe:input source="messageTemplate" target="messageType" />
+          <zeebe:input source="loan_sucessful" target="templateName" />
+          <zeebe:input source="en_US" target="templateLanguageCode" />
+          <zeebe:input source="=[]" target="headerParameters" />
+          <zeebe:input source="=loanMessageBody" target="bodyParameters" />
+          <zeebe:input source="bearer" target="authentication.type" />
+          <zeebe:input source="post" target="method" />
+          <zeebe:input source="=&#34;https://graph.facebook.com/v17.0/&#34;+senderPhoneId+&#34;/messages&#34;" target="url" />
+          <zeebe:input source="={&#34;messaging_product&#34;:&#34;whatsapp&#34;,&#34;recipient_type&#34;:&#34;individual&#34;,&#34;to&#34;:recipientPhoneNumber,&#34;type&#34;:&#34;template&#34;, &#34;template&#34;: {&#34;name&#34;:templateName, &#34;language&#34;: { &#34;code&#34;: templateLanguageCode}, &#34;components&#34;:[{&#34;type&#34;:&#34;header&#34;, &#34;parameters&#34;:headerParameters}, {&#34;type&#34;:&#34;body&#34;, &#34;parameters&#34;:bodyParameters}]}}" target="body" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="sendEBookLinkResult" />
+          <zeebe:header key="errorExpression" value="=if error.code = &#34;404&#34; then&#10;  bpmnError(&#34;404&#34;, &#34;Got a 404&#34;)&#10;else if error.code = &#34;500&#34; then&#10;  bpmnError(&#34;500&#34;, &#34;Got a 500&#34;)&#10;else&#10;  null" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1bkca4i</bpmn:incoming>
+      <bpmn:outgoing>Flow_046zk0n</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_1i8cwdq" name="Get Link">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formKey="camunda-forms:bpmn:UserTaskForm_1lo0l7p" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=book" target="book" />
+          <zeebe:input source="=timeOfLoan" target="timeOfLoan" />
+          <zeebe:input source="=loanCost" target="loanCost" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0k6s7vb</bpmn:incoming>
+      <bpmn:incoming>Flow_046zk0n</bpmn:incoming>
+      <bpmn:outgoing>Flow_1btg08d</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:boundaryEvent id="Event_013r8gw" attachedToRef="sendEBookLink">
+      <bpmn:outgoing>Flow_0k6s7vb</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_1xc4n9f" errorRef="Error_1p2lpgl" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_046zk0n" sourceRef="sendEBookLink" targetRef="Activity_1i8cwdq" />
+    <bpmn:sequenceFlow id="Flow_0k6s7vb" sourceRef="Event_013r8gw" targetRef="Activity_1i8cwdq" />
+    <bpmn:sequenceFlow id="Flow_1tg389h" sourceRef="Activity_0b5tu1z" targetRef="Gateway_07afq49" />
+    <bpmn:serviceTask id="Activity_0b5tu1z" name="Calculate Timers">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="calculate-timers" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=timeOfLoan" target="timeOfLoan" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1btg08d</bpmn:incoming>
+      <bpmn:outgoing>Flow_1tg389h</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:subProcess id="Activity_1mj6g9m" name="Return Book">
+      <bpmn:extensionElements>
+        <zeebe:ioMapping>
+          <zeebe:input source="=bearerToken" target="bearerToken" />
+          <zeebe:input source="=1001" target="bookshelfToAdd" />
+          <zeebe:input source="=1003" target="bookshelfToRemove" />
+          <zeebe:input source="=book.id" target="bookId" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_05a0aac</bpmn:incoming>
+      <bpmn:incoming>Flow_1g7z0bk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0vfsszf</bpmn:outgoing>
+      <bpmn:startEvent id="Event_00swsue">
+        <bpmn:outgoing>Flow_1l5dp5j</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:endEvent id="Event_1fk5clm">
+        <bpmn:incoming>Flow_0pe8qfo</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:serviceTask id="Activity_0jvh580" name="Add Book to Bookshelf" zeebe:modelerTemplate="ae39c5a6-ed65-4c99-9622-5f2e660970f0" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/png;base64,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">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="io.camunda:google-books:1" />
+          <zeebe:ioMapping>
+            <zeebe:input source="bearer" target="authentication.authType" />
+            <zeebe:input source="=bearerToken" target="authentication.bearerToken" />
+            <zeebe:input source="addVolumeToMyBookshelf" target="operation.type" />
+            <zeebe:input source="=bookshelfToAdd" target="operation.bookshelfId" />
+            <zeebe:input source="=bookId" target="operation.volumeId" />
+          </zeebe:ioMapping>
+          <zeebe:taskHeaders />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_1l5dp5j</bpmn:incoming>
+        <bpmn:outgoing>Flow_1x5sygt</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:serviceTask id="Activity_0r9azw3" name="Remove Book from Booksheld" zeebe:modelerTemplate="ae39c5a6-ed65-4c99-9622-5f2e660970f0" zeebe:modelerTemplateVersion="3" zeebe:modelerTemplateIcon="data:image/png;base64,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">
+        <bpmn:extensionElements>
+          <zeebe:taskDefinition type="io.camunda:google-books:1" />
+          <zeebe:ioMapping>
+            <zeebe:input source="bearer" target="authentication.authType" />
+            <zeebe:input source="=bearerToken" target="authentication.bearerToken" />
+            <zeebe:input source="removeVolumeFromMyBookshelf" target="operation.type" />
+            <zeebe:input source="=bookshelfToRemove" target="operation.bookshelfId" />
+            <zeebe:input source="=bookId" target="operation.volumeId" />
+          </zeebe:ioMapping>
+          <zeebe:taskHeaders />
+        </bpmn:extensionElements>
+        <bpmn:incoming>Flow_1x5sygt</bpmn:incoming>
+        <bpmn:outgoing>Flow_0pe8qfo</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:sequenceFlow id="Flow_1l5dp5j" sourceRef="Event_00swsue" targetRef="Activity_0jvh580" />
+      <bpmn:sequenceFlow id="Flow_0pe8qfo" sourceRef="Activity_0r9azw3" targetRef="Event_1fk5clm" />
+      <bpmn:sequenceFlow id="Flow_1x5sygt" sourceRef="Activity_0jvh580" targetRef="Activity_0r9azw3" />
+    </bpmn:subProcess>
+    <bpmn:endEvent id="Event_1vlz9xq" name="End Loan Expired">
+      <bpmn:incoming>Flow_0vfsszf</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0vfsszf" sourceRef="Activity_1mj6g9m" targetRef="Event_1vlz9xq" />
+    <bpmn:endEvent id="endOfLoan" name="End Loan Returned">
+      <bpmn:incoming>Flow_0j90gpr</bpmn:incoming>
+      <bpmn:terminateEventDefinition id="TerminateEventDefinition_1kyy3rk" />
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:message id="Message_2grlus7" name="LoanReturnManually">
+    <bpmn:extensionElements>
+      <zeebe:subscription correlationKey="=book.id" />
+    </bpmn:extensionElements>
+  </bpmn:message>
+  <bpmn:error id="Error_069yslm" name="LoanException" errorCode="LOAN_EXCEPTION" />
+  <bpmn:error id="Error_1p2lpgl" name="500" errorCode="500" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1abp1pd">
+      <bpmndi:BPMNShape id="Participant_1svapms_di" bpmnElement="Participant_1svapms" isHorizontal="true">
+        <dc:Bounds x="120" y="80" width="2408" height="610" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_19txnoj_di" bpmnElement="startLoan">
+        <dc:Bounds x="172" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="166" y="285" width="51" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1xqpazu_di" bpmnElement="ChoseAnEBook">
+        <dc:Bounds x="480" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1chnlsa_di" bpmnElement="gateway_Join01" isMarkerVisible="true">
+        <dc:Bounds x="395" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="409" y="211" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_054765q_di" bpmnElement="defineLoanTimeAndCost">
+        <dc:Bounds x="770" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0y3zqy1_di" bpmnElement="Activity_1sxvxsd">
+        <dc:Bounds x="630" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0r2cjqr_di" bpmnElement="Activity_0ic91g3">
+        <dc:Bounds x="920" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nv8fry_di" bpmnElement="searchAvailableEBooks">
+        <dc:Bounds x="260" y="220" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1djujzu_di" bpmnElement="timer_TwoDaysBeforeReturn">
+        <dc:Bounds x="1842" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1826" y="285" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_13ivq0y_di" bpmnElement="endOfNotification">
+        <dc:Bounds x="2142" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2115" y="285" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1l1wlmh_di" bpmnElement="gateway_LoanReturn">
+        <dc:Bounds x="1835" y="375" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1830" y="345" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ba6zcf_di" bpmnElement="timer_LoanTimeExpired">
+        <dc:Bounds x="1942" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1934" y="535" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1xfjxtn_di" bpmnElement="message_LoanReturnManually">
+        <dc:Bounds x="1942" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1930" y="425" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1kug81z_di" bpmnElement="Gateway_07afq49">
+        <dc:Bounds x="1695" y="235" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1771a3x" bpmnElement="returnBook">
+        <dc:Bounds x="2240" y="360" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ye7out_di" bpmnElement="loanBook">
+        <dc:Bounds x="1070" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_06ochsq_di" bpmnElement="gateway_ChoseOther" isMarkerVisible="true">
+        <dc:Bounds x="1225" y="435" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1211" y="405" width="78" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1mctt0f_di" bpmnElement="cancelLoan">
+        <dc:Bounds x="1342" y="442" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1330" y="485" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1pu6hbf_di" bpmnElement="createWppMessages">
+        <dc:Bounds x="1230" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ccnxkf_di" bpmnElement="notifyTwoDaysForEndOfLoanTime">
+        <dc:Bounds x="1970" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0t8rjsf_di" bpmnElement="notifyEndOfLoanTime">
+        <dc:Bounds x="2040" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_01vii6y_di" bpmnElement="choseOtherEBook">
+        <dc:Bounds x="1070" y="420" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ppldsw_di" bpmnElement="Activity_1pndvre">
+        <dc:Bounds x="2110" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00mohiv_di" bpmnElement="Activity_1wjkq9n">
+        <dc:Bounds x="2130" y="590" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06e0k7u_di" bpmnElement="sendEBookLink">
+        <dc:Bounds x="1420" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0gs2fu4_di" bpmnElement="Activity_1i8cwdq">
+        <dc:Bounds x="1427" y="430" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ko2rie_di" bpmnElement="Activity_0b5tu1z">
+        <dc:Bounds x="1556" y="220" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0c9svl2" bpmnElement="Activity_1mj6g9m">
+        <dc:Bounds x="2240" y="470" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1vlz9xq_di" bpmnElement="Event_1vlz9xq">
+        <dc:Bounds x="2392" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2366" y="535" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0othiap_di" bpmnElement="endOfLoan">
+        <dc:Bounds x="2392" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2386" y="425" width="48" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0h12hwr_di" bpmnElement="Event_013r8gw">
+        <dc:Bounds x="1469" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0m1vd12_di" bpmnElement="Event_06m9cxe">
+        <dc:Bounds x="2072" y="532" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0oufy09_di" bpmnElement="Event_0u33jmd">
+        <dc:Bounds x="2002" y="202" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12gmgq9_di" bpmnElement="exception_LoanError">
+        <dc:Bounds x="1102" y="282" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_12a7hjb_di" bpmnElement="Flow_12a7hjb">
+        <di:waypoint x="208" y="260" />
+        <di:waypoint x="260" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0d8twmh_di" bpmnElement="Flow_0d8twmh">
+        <di:waypoint x="360" y="260" />
+        <di:waypoint x="395" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tgugqx_di" bpmnElement="Flow_1tgugqx">
+        <di:waypoint x="580" y="260" />
+        <di:waypoint x="630" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14na083_di" bpmnElement="Flow_14na083">
+        <di:waypoint x="1250" y="485" />
+        <di:waypoint x="1250" y="530" />
+        <di:waypoint x="420" y="530" />
+        <di:waypoint x="420" y="285" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="827" y="512" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01ceugk_di" bpmnElement="Flow_01ceugk">
+        <di:waypoint x="445" y="260" />
+        <di:waypoint x="480" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1oczx1g_di" bpmnElement="Flow_1oczx1g">
+        <di:waypoint x="870" y="260" />
+        <di:waypoint x="920" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pnbhzo_di" bpmnElement="Flow_0pnbhzo">
+        <di:waypoint x="1020" y="260" />
+        <di:waypoint x="1070" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0quqhk1_di" bpmnElement="Flow_0quqhk1">
+        <di:waypoint x="1720" y="285" />
+        <di:waypoint x="1720" y="400" />
+        <di:waypoint x="1835" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02da48n_di" bpmnElement="Flow_02da48n">
+        <di:waypoint x="1878" y="260" />
+        <di:waypoint x="1970" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z2grnv_di" bpmnElement="Flow_0z2grnv">
+        <di:waypoint x="2070" y="260" />
+        <di:waypoint x="2142" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0x7uhj1_di" bpmnElement="Flow_0x7uhj1">
+        <di:waypoint x="1885" y="400" />
+        <di:waypoint x="1942" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z3cogf_di" bpmnElement="Flow_0z3cogf">
+        <di:waypoint x="1860" y="425" />
+        <di:waypoint x="1860" y="510" />
+        <di:waypoint x="1942" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0q6ay9x_di" bpmnElement="Flow_0q6ay9x">
+        <di:waypoint x="1978" y="510" />
+        <di:waypoint x="2040" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xk7dvc_di" bpmnElement="Flow_1xk7dvc">
+        <di:waypoint x="1978" y="400" />
+        <di:waypoint x="2240" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1g7z0bk_di" bpmnElement="Flow_1g7z0bk">
+        <di:waypoint x="2140" y="510" />
+        <di:waypoint x="2240" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01zf7ct_di" bpmnElement="Flow_01zf7ct">
+        <di:waypoint x="730" y="260" />
+        <di:waypoint x="770" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0xsi48a_di" bpmnElement="Flow_0xsi48a">
+        <di:waypoint x="1745" y="260" />
+        <di:waypoint x="1842" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1b25i46_di" bpmnElement="Flow_1b25i46">
+        <di:waypoint x="1170" y="260" />
+        <di:waypoint x="1230" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j90gpr_di" bpmnElement="Flow_0j90gpr">
+        <di:waypoint x="2340" y="400" />
+        <di:waypoint x="2392" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v9d3w5_di" bpmnElement="Flow_0v9d3w5">
+        <di:waypoint x="1120" y="318" />
+        <di:waypoint x="1120" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qgyg3d_di" bpmnElement="Flow_1qgyg3d">
+        <di:waypoint x="1170" y="460" />
+        <di:waypoint x="1225" y="460" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16f6vqi_di" bpmnElement="Flow_16f6vqi">
+        <di:waypoint x="1275" y="460" />
+        <di:waypoint x="1342" y="460" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1301" y="442" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1btg08d_di" bpmnElement="Flow_1btg08d">
+        <di:waypoint x="1527" y="470" />
+        <di:waypoint x="1606" y="470" />
+        <di:waypoint x="1606" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ey3fmq_di" bpmnElement="Flow_1ey3fmq">
+        <di:waypoint x="2020" y="202" />
+        <di:waypoint x="2020" y="140" />
+        <di:waypoint x="2110" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bfx88f_di" bpmnElement="Flow_1bfx88f">
+        <di:waypoint x="2090" y="568" />
+        <di:waypoint x="2090" y="630" />
+        <di:waypoint x="2130" y="630" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ounus7_di" bpmnElement="Flow_0ounus7">
+        <di:waypoint x="2160" y="180" />
+        <di:waypoint x="2160" y="242" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05a0aac_di" bpmnElement="Flow_05a0aac">
+        <di:waypoint x="2180" y="590" />
+        <di:waypoint x="2180" y="510" />
+        <di:waypoint x="2240" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1bkca4i_di" bpmnElement="Flow_1bkca4i">
+        <di:waypoint x="1330" y="260" />
+        <di:waypoint x="1420" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_046zk0n_di" bpmnElement="Flow_046zk0n">
+        <di:waypoint x="1447" y="300" />
+        <di:waypoint x="1447" y="430" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0k6s7vb_di" bpmnElement="Flow_0k6s7vb">
+        <di:waypoint x="1487" y="318" />
+        <di:waypoint x="1487" y="430" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tg389h_di" bpmnElement="Flow_1tg389h">
+        <di:waypoint x="1656" y="260" />
+        <di:waypoint x="1695" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0vfsszf_di" bpmnElement="Flow_0vfsszf">
+        <di:waypoint x="2340" y="510" />
+        <di:waypoint x="2392" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_150mwce_di" bpmnElement="Association_150mwce">
+        <di:waypoint x="1462" y="220" />
+        <di:waypoint x="1456" y="194" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_1e0gb1b_di" bpmnElement="TextAnnotation_1e0gb1b">
+        <dc:Bounds x="1255" y="110" width="430" height="84" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_0mf15nn">
+    <bpmndi:BPMNPlane id="BPMNPlane_0hprwod" bpmnElement="loanBook">
+      <bpmndi:BPMNShape id="Event_09iiojx_di" bpmnElement="Event_09iiojx">
+        <dc:Bounds x="172" y="192" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0la9a8f_di" bpmnElement="Event_0la9a8f">
+        <dc:Bounds x="672" y="192" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ikxeu6_di" bpmnElement="Activity_0vx47k4">
+        <dc:Bounds x="290" y="170" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0qsqh74_di" bpmnElement="Activity_0x8ghd4">
+        <dc:Bounds x="480" y="170" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0uxq2vm_di" bpmnElement="Flow_0uxq2vm">
+        <di:waypoint x="208" y="210" />
+        <di:waypoint x="290" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02p89h8_di" bpmnElement="Flow_02p89h8">
+        <di:waypoint x="390" y="210" />
+        <di:waypoint x="480" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hibhsa_di" bpmnElement="Flow_0hibhsa">
+        <di:waypoint x="580" y="210" />
+        <di:waypoint x="672" y="210" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_0suzitx">
+    <bpmndi:BPMNPlane id="BPMNPlane_1rc51di" bpmnElement="returnBook">
+      <bpmndi:BPMNShape id="BPMNShape_1wvody6" bpmnElement="Event_1i9vrj0">
+        <dc:Bounds x="180" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_092xhsi" bpmnElement="Event_15ylfvh">
+        <dc:Bounds x="680" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0mgtwfe" bpmnElement="Activity_13r59i9">
+        <dc:Bounds x="298" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1brazv8" bpmnElement="Activity_1m2idd1">
+        <dc:Bounds x="488" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_1qhbxqi" bpmnElement="Flow_0mhkl7m">
+        <di:waypoint x="216" y="200" />
+        <di:waypoint x="298" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_1degjs0" bpmnElement="Flow_0hwcy76">
+        <di:waypoint x="588" y="200" />
+        <di:waypoint x="680" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_07avwzh" bpmnElement="Flow_0nf17h4">
+        <di:waypoint x="398" y="200" />
+        <di:waypoint x="488" y="200" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_0x20pzh">
+    <bpmndi:BPMNPlane id="BPMNPlane_1xh44b6" bpmnElement="Activity_1mj6g9m">
+      <bpmndi:BPMNShape id="BPMNShape_0054fzh" bpmnElement="Event_00swsue">
+        <dc:Bounds x="180" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0164vkg" bpmnElement="Event_1fk5clm">
+        <dc:Bounds x="680" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1f2g0zs" bpmnElement="Activity_0jvh580">
+        <dc:Bounds x="298" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0d4aa3d" bpmnElement="Activity_0r9azw3">
+        <dc:Bounds x="488" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_05w2b5h" bpmnElement="Flow_1l5dp5j">
+        <di:waypoint x="216" y="200" />
+        <di:waypoint x="298" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_0j6zlkn" bpmnElement="Flow_0pe8qfo">
+        <di:waypoint x="588" y="200" />
+        <di:waypoint x="680" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_0y7rlqs" bpmnElement="Flow_1x5sygt">
+        <di:waypoint x="398" y="200" />
+        <di:waypoint x="488" y="200" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

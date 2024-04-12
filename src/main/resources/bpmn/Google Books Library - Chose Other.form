@@ -1,0 +1,34 @@
+{
+  "components": [
+    {
+      "values": [
+        {
+          "label": "Yes, take me back to the booklist.",
+          "value": "true"
+        },
+        {
+          "label": "No, I'm done for now.",
+          "value": "false"
+        }
+      ],
+      "label": "There was an error on your book loan. Do you want to try again or chose other?",
+      "type": "radio",
+      "layout": {
+        "row": "Row_0bi25pp",
+        "columns": null
+      },
+      "id": "Field_1s9umfz",
+      "key": "tryBookSelectionAgain",
+      "defaultValue": "true"
+    }
+  ],
+  "type": "default",
+  "id": "GoogleBooksLibrary_FormChoseOther",
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "schemaVersion": 15
+}

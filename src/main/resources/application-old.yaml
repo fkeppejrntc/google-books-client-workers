@@ -1,0 +1,12 @@
+server.port: 8081
+
+zeebe.client:
+  cloud:
+    region: dsm-1
+    clusterId: 48e74422-0947-47c1-a2d0-bae56fdbd61f
+    clientId: ptlsMJMWv4FJOoCbqNw7SNFr7wXbupZu
+    clientSecret: IxN.Sc8J1EDyqQGgCuqeszRYTyfjKxgiZDdE45NpBKbAxT8oP4ylicDXoNgSU5Og
+  broker:
+    gateway-address: https://login.cloud.camunda.io/oauth/token
+  security:
+    plaintext: false

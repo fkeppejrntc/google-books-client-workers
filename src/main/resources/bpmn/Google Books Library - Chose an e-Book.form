@@ -1,0 +1,144 @@
+{
+  "components": [
+    {
+      "text": "##### Book List",
+      "type": "text",
+      "id": "Subheading_0",
+      "layout": {
+        "row": "Row_0qs44cf"
+      }
+    },
+    {
+      "label": "Add your Phone #",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0wc1m30",
+        "columns": null
+      },
+      "id": "Field_1qbybqx",
+      "key": "phoneNumber",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "components": [
+        {
+          "label": "",
+          "type": "checkbox",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": 2
+          },
+          "id": "Field_008es33",
+          "key": "selected",
+          "disabled": false
+        },
+        {
+          "label": "Book Title",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0oq23jl",
+          "key": "title",
+          "disabled": false,
+          "readonly": true
+        },
+        {
+          "label": "Authors",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0gf94xj",
+          "key": "authors",
+          "readonly": true,
+          "disabled": false
+        },
+        {
+          "label": "Genre",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0rwlp2n",
+          "key": "genre",
+          "disabled": false,
+          "readonly": true
+        },
+        {
+          "label": "Page Count",
+          "type": "number",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0ch1tb9",
+          "key": "pageCount",
+          "readonly": true,
+          "disabled": false
+        },
+        {
+          "label": "Id",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_17pz1sf",
+          "key": "id",
+          "readonly": true
+        },
+        {
+          "label": "Link",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_15dkcae",
+          "key": "link",
+          "readonly": true
+        },
+        {
+          "label": "Best Seller",
+          "type": "checkbox",
+          "layout": {
+            "row": "Row_0zisdag",
+            "columns": null
+          },
+          "id": "Field_0aliyp8",
+          "key": "isBestSeller",
+          "readonly": true
+        }
+      ],
+      "showOutline": true,
+      "isRepeating": true,
+      "allowAddRemove": false,
+      "defaultRepetitions": 1,
+      "label": "Chose one ore more books to read",
+      "type": "dynamiclist",
+      "layout": {
+        "row": "Row_0gug6o9",
+        "columns": null
+      },
+      "id": "Field_0l4oyj1",
+      "path": "booklist.volumeList",
+      "verticalAlignment": "center"
+    }
+  ],
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.4.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "schemaVersion": 15,
+  "id": "GoogleBooksLibrary_FormChoseAnEBook",
+  "generated": true,
+  "type": "default"
+}
